@@ -53,6 +53,14 @@ const createPasswordResetTokensTable =
   require(
     "./database/migrations/createPasswordResetTokensTable"
   );
+const createUserSessionsTable =
+  require(
+    "./database/migrations/createUserSessionsTable"
+  );
+const createInspectionTable =
+  require(
+    "./database/migrations/createInspectionTable"
+  );
 
 const inspectionRoutes =
   require(
@@ -213,6 +221,10 @@ async function startServer() {
     await createUsersTable();
 
     await createPasswordResetTokensTable();
+
+    await createUserSessionsTable();
+
+    await createInspectionTable();
 
     httpServer.listen(
       PORT,
