@@ -41,6 +41,7 @@ tmp/
 # Uploaded files
 uploads/
 public/uploads/
+evidence/
 
 # Database files
 *.sqlite

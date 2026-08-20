@@ -11,6 +11,7 @@ const inspectionRepository =
   require(
     "./inspectionRepository"
   );
+const { storeEvidence } = require("./evidenceStorage");
 
 // ==========================================================
 // VALID STATUS VALUES
@@ -173,6 +174,14 @@ async function createInspection(
       inspectionData
     );
 
+  const storedEvidenceLink = await storeEvidence(
+    inspectionData.event_id,
+    inspectionData.evidence_image
+  );
+  if (storedEvidenceLink) {
+    normalizedData.evidence_link = storedEvidenceLink;
+  }
+
   const savedRecord =
     await inspectionRepository
       .create(
@@ -224,6 +233,10 @@ async function getLatestInspections(
     );
 }
 
+async function getInspectionById(id) {
+  return await inspectionRepository.findById(id);
+}
+
 // ==========================================================
 // EXPORT
 // ==========================================================
@@ -232,4 +245,5 @@ module.exports = {
   createInspection,
 
   getLatestInspections,
+  getInspectionById,
 };

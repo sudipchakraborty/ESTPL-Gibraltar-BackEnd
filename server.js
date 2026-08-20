@@ -61,6 +61,7 @@ const createInspectionTable =
   require(
     "./database/migrations/createInspectionTable"
   );
+const { EVIDENCE_DIRECTORY } = require("./modules/inspection/evidenceStorage");
 
 const inspectionRoutes =
   require(
@@ -94,6 +95,8 @@ app.use(
     extended: true,
   })
 );
+
+app.use("/evidence", express.static(EVIDENCE_DIRECTORY));
 
 app.use(
     "/api/dashboard",
@@ -141,6 +144,7 @@ const io =
           "POST",
         ],
       },
+      maxHttpBufferSize: 10 * 1024 * 1024,
     }
   );
 
