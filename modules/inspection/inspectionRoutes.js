@@ -27,6 +27,8 @@ router.get(
     .getInspections
 );
 
+router.get("/:id", inspectionController.getInspection);
+
 // ==========================================================
 // EXPORT
 // ==========================================================

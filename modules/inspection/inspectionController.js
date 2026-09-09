@@ -61,10 +61,23 @@ async function getInspections(
   }
 }
 
+async function getInspection(request, response) {
+  try {
+    const inspection = await inspectionService.getInspectionById(request.params.id);
+    if (!inspection) {
+      return response.status(404).json({ success: false, message: "Inspection not found" });
+    }
+    return response.status(200).json({ success: true, data: inspection });
+  } catch (error) {
+    return response.status(500).json({ success: false, message: "Unable to retrieve inspection", error: error.message });
+  }
+}
+
 // ==========================================================
 // EXPORT
 // ==========================================================
 
 module.exports = {
   getInspections,
+  getInspection,
 };
