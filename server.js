@@ -76,8 +76,6 @@ const initializeSocket =
 // APPLICATION
 // ==========================================================
 
-
-
 app.use(
   cors({
     origin:
